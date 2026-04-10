@@ -1,16 +1,15 @@
 # TASK 1 BRIEF
 
-## University context
-
-This task is from Theme 5, Task 1:
+## Assignment identity
+This repository targets Theme 5, Task 1:
 "Development of software methods for controlling IoT devices."
 
-The final output is NOT just code.
-The code is a small practical proof used to support an academic report.
+The final output is not just code. The code is a small practical proof used to support an academic report.
 
-## What the task must cover
+If broader course materials show cloud-connected examples, those examples are background context only. They are not required for this Task 1 implementation.
 
-The written work must explain:
+## What the written work must cover
+The report should explain:
 
 1. How programming enables IoT devices to:
    - react to environmental input
@@ -18,9 +17,9 @@ The written work must explain:
    - perform automated actions
 
 2. Historical evolution of software methods:
-   - 1970–2000: procedural / imperative programming (C, C++, Pascal)
-   - 2000–2015: interpreted and web-oriented languages (Python, JavaScript)
-   - 2015–2026: Blockly, low-code, AI-assisted programming, edge computing, context-aware logic, autonomous IoT algorithms
+   - 1970-2000: procedural / imperative programming (C, C++, Pascal)
+   - 2000-2015: interpreted and web-oriented languages (Python, JavaScript)
+   - 2015-2026: Blockly, low-code, AI-assisted programming, edge computing, context-aware logic, autonomous IoT algorithms
 
 3. A real modern IoT device example:
    - what kind of software it runs
@@ -31,40 +30,61 @@ The written work must explain:
    - which programming skills are most important for IoT development in 2026
 
 ## Chosen practical concept
+We will build a small ESP32 simulation in Wokwi using VS Code.
 
-We will build a small, simple ESP32 simulation in Wokwi using VS Code.
+Its role is to provide a clean, easy-to-explain practical example for the report.
 
-### Selected hardware
+## Locked implementation profile
+Use the following practical defaults unless the user explicitly changes them:
 
-- ESP32 DevKit
-- DHT22 temperature/humidity sensor
-- 1 LED
-- 1 resistor for the LED
+- Board: ESP32 DevKit v1
+- Sensor: DHT22 temperature/humidity sensor
+- Output: one external LED
+- Resistor: one LED resistor, typically 220 ohm
+- Development style: Arduino sketch in Wokwi
+- Serial baud rate: `115200`
+- Temperature threshold: `28.0 C`
+- Sensor read interval: `2000 ms` minimum
+- DHT22 data pin: `GPIO4`
+- LED pin: `GPIO18`
+- Processing model: local only, on the device
 
-### Selected behavior
+## Library target
+Prefer:
+- `DHT sensor library` by Adafruit
+- `Adafruit Unified Sensor`
 
-- The ESP32 reads temperature and humidity from the DHT22
-- The values are printed to the serial monitor
-- If temperature is above a threshold, the LED turns on
-- If temperature is below the threshold, the LED turns off
-- The behavior must be stable and easy to demonstrate with screenshots
+Reason:
+- these are common, well-documented, and easy to explain in an academic report
+
+## Required runtime behavior
+The practical demo must do the following:
+
+- initialize the serial monitor
+- initialize the DHT22 sensor
+- initialize the LED pin as output
+- read temperature and humidity repeatedly
+- print readable values to the serial monitor on every cycle
+- compare the temperature against the threshold
+- turn the LED on when the temperature is above the threshold
+- turn the LED off when the temperature is at or below the threshold
+- print the LED state in the serial monitor
+- handle failed sensor readings with a clear error message and retry on the next cycle
 
 ## Why this project was chosen
-
 This project is intentionally simple.
-Its purpose is to demonstrate:
 
+Its purpose is to demonstrate:
 - firmware logic
 - sensor reading
 - threshold-based IF decision making
-- repeated execution in loop()
+- repeated execution in `loop()`
 - local processing on the device
 
-This is enough to support the academic explanation required by Task 1.
+This is enough to support the academic explanation required by Theme 5, Task 1.
 
 ## Scope limits
-
-Do NOT add:
+Do not add:
 
 - Raspberry Pi
 - MQTT
@@ -76,33 +96,45 @@ Do NOT add:
 - unnecessary libraries
 - advanced UI or external integrations
 
-Those may be discussed in the written report as future extensions, but they are NOT part of this implementation.
+These may be discussed in the report as future extensions, but they are not part of the practical implementation.
 
-## Deliverables needed from the practical side
+## ESP32 pin safety note
+For this task, avoid using:
+- `GPIO6-GPIO11` because they are commonly tied to flash hardware
+- `GPIO34-GPIO39` for DHT data because they are input-only pins
 
+Use ordinary, safe digital GPIOs for the DHT22 data line and LED output.
+
+## Practical deliverables
 We need:
 
 1. A working Wokwi project
-2. Code that compiles/runs without errors
-3. Screenshot of the circuit
-4. Screenshot of the serial monitor in normal condition
-5. Screenshot of the serial monitor in triggered condition
-6. Evidence that the LED changes state correctly
-7. Clean code that is easy to explain in the report
+2. Code that compiles and runs without errors
+3. A circuit diagram that matches the code
+4. A screenshot of the circuit
+5. A screenshot of the serial monitor in normal condition
+6. A screenshot of the serial monitor in triggered condition
+7. Evidence that the LED changes state correctly
+8. Clean code that is easy to explain in the report
+
+## Expected project files
+The practical project should normally contain:
+- `sketch.ino`
+- `diagram.json`
+- `wokwi.toml`
+- `libraries.txt` if external Arduino libraries are required
 
 ## What the report will use from this project
-
 The report will use this project as the practical example for:
 
-- setup() and loop()
+- `setup()` and `loop()`
 - sensor libraries
 - local firmware behavior
-- IF–THEN threshold logic
+- IF-THEN threshold logic
 - device-side data handling
 - difference between local processing and possible cloud extension
 
 ## Success criteria
-
 The implementation is successful if:
 
 - the ESP32 reads the DHT22 correctly
@@ -112,31 +144,12 @@ The implementation is successful if:
 - the code is simple enough to explain in an academic report
 
 ## What Codex should help with
-
 Codex should:
 
 1. Create or update the Wokwi-compatible project files
 2. Write clean Arduino code for the selected behavior
 3. Keep the code simple and well commented
-4. Use conventional pin assignments
-5. Avoid unnecessary complexity
-6. Help produce a short manual test checklist
-7. Prefer reliability and clarity over extra features
-
-- the ESP32 reads the DHT22 correctly
-- the serial monitor prints readable values
-- the LED responds correctly to threshold changes
-- the simulation is easy to screenshot
-- the code is simple enough to explain in an academic report
-
-## What Codex should help with
-
-Codex should:
-
-1. Create or update the Wokwi-compatible project files
-2. Write clean Arduino code for the selected behavior
-3. Keep the code simple and well commented
-4. Use conventional pin assignments
+4. Use the locked practical defaults unless the user changes them
 5. Avoid unnecessary complexity
 6. Help produce a short manual test checklist
 7. Prefer reliability and clarity over extra features
