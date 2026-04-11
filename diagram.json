@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "author": "OpenAI Codex",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": -43.3,
+      "left": 33.4,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 34.8,
+      "left": -73,
+      "attrs": {
+        "color": "red",
+        "label": "Hot"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 61.55,
+      "left": -38.4,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -9.3,
+      "left": 273,
+      "attrs": {
+        "temperature": "24",
+        "humidity": "40"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "dht1:SDA", "esp:D4", "green", [ "v28.8", "h-47.9", "v-57.7" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v38.4", "h-153.6", "v-38.4", "h-9.6" ] ],
+    [ "r1:2", "esp:D18", "green", [ "v0" ] ],
+    [ "r1:1", "led1:A", "green", [ "v0" ] ],
+    [ "led1:C", "esp:GND.2", "black", [ "v28.8", "h0.4" ] ]
+  ],
+  "serialMonitor": {
+    "display": "always",
+    "newline": "lf"
+  },
+  "dependencies": {}
+}
