@@ -38,9 +38,9 @@ Avoid:
 ## Technical stack
 Use:
 - ESP32 DevKit
-- Arduino-style sketch
+- Arduino framework for ESP32
 - Wokwi simulation
-- VS Code workflow
+- VS Code + PlatformIO workflow
 
 ## Default constraints
 - Keep implementations small and screenshot-friendly
@@ -66,6 +66,7 @@ The practical demo should show local sensing, local decision making, and local a
 - Keep the circuit minimal and easy to explain in a report
 - Use safe, conventional ESP32 GPIOs for the selected parts
 - Avoid problematic ESP32 pins for the DHT data line, especially flash pins and input-only pins
+- Prefer a known-good Wokwi pin such as `GPIO15` for the DHT22 data line in this project
 - Prefer stable polling intervals for DHT sensors
 - Make the serial output easy to screenshot
 
@@ -73,7 +74,8 @@ The practical demo should show local sensing, local decision making, and local a
 Common files may include:
 - `TASK_1_BRIEF.md`
 - `AGENTS.md`
-- `sketch.ino`
+- `src/main.cpp`
+- `platformio.ini`
 - `diagram.json`
 - `wokwi.toml`
 - `libraries.txt`

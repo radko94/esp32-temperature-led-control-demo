@@ -30,7 +30,7 @@ The report should explain:
    - which programming skills are most important for IoT development in 2026
 
 ## Chosen practical concept
-We will build a small ESP32 simulation in Wokwi using VS Code.
+We will build a small ESP32 simulation in Wokwi using VS Code and PlatformIO.
 
 Its role is to provide a clean, easy-to-explain practical example for the report.
 
@@ -41,21 +41,20 @@ Use the following practical defaults unless the user explicitly changes them:
 - Sensor: DHT22 temperature/humidity sensor
 - Output: one external LED
 - Resistor: one LED resistor, typically 220 ohm
-- Development style: Arduino sketch in Wokwi
+- Development style: Arduino framework project for ESP32 in Wokwi/PlatformIO
 - Serial baud rate: `115200`
 - Temperature threshold: `28.0 C`
 - Sensor read interval: `2000 ms` minimum
-- DHT22 data pin: `GPIO4`
+- DHT22 data pin: `GPIO15`
 - LED pin: `GPIO18`
 - Processing model: local only, on the device
 
 ## Library target
 Prefer:
-- `DHT sensor library` by Adafruit
-- `Adafruit Unified Sensor`
+- `DHTesp`
 
 Reason:
-- these are common, well-documented, and easy to explain in an academic report
+- it works cleanly with ESP32 and Wokwi, keeps the code small, and matches the current project implementation
 
 ## Required runtime behavior
 The practical demo must do the following:
@@ -119,7 +118,8 @@ We need:
 
 ## Expected project files
 The practical project should normally contain:
-- `sketch.ino`
+- `src/main.cpp`
+- `platformio.ini`
 - `diagram.json`
 - `wokwi.toml`
 - `libraries.txt` if external Arduino libraries are required

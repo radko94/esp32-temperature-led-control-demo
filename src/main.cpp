@@ -2,7 +2,7 @@
 #include "DHTesp.h"
 
 // Task 1: read temperature/humidity and control an LED using a simple threshold.
-const int DHT_PIN = 4;
+const int DHT_PIN = 15;
 const int LED_PIN = 18;
 const float TEMP_THRESHOLD_C = 28.0;
 const unsigned long READ_INTERVAL_MS = 2000;
@@ -13,6 +13,8 @@ void printStartupMessage() {
   Serial.println();
   Serial.println("Theme 5 - Task 1");
   Serial.println("ESP32 + DHT22 + LED threshold demo");
+  Serial.print("DHT data pin: GPIO");
+  Serial.println(DHT_PIN);
   Serial.print("Temperature threshold: ");
   Serial.print(TEMP_THRESHOLD_C, 1);
   Serial.println(" C");
