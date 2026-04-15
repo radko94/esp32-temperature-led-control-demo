@@ -125,3 +125,54 @@ LED state: ON
 - This project is intentionally small and beginner-friendly.
 - It focuses on device-side logic only.
 - Cloud services, dashboards, MQTT, and REST integrations are intentionally out of scope for this task.
+
+
+Библиография
+
+[1] W3C, Web of Things (WoT) Architecture 1.1, W3C Recommendation, 2023.
+Достъпно на: https://www.w3.org/TR/wot-architecture11/
+
+[2] A. K. Dey, “Understanding and Using Context,” Personal and Ubiquitous Computing, vol. 5, no. 1, pp. 4–7, 2001.
+Достъпно на: https://doi.org/10.1007/s007790170019
+
+[3] M. Satyanarayanan, “The Emergence of Edge Computing,” Computer, vol. 50, no. 1, pp. 30–39, 2017.
+Достъпно на: https://doi.org/10.1109/MC.2017.9
+
+[4] Espressif Systems, Arduino ESP32 Documentation.
+Достъпно на: https://docs.espressif.com/projects/arduino-esp32/
+
+[5] Arduino, Using Functions in a Sketch; Getting Started with Arduino.
+Достъпно на:
+https://docs.arduino.cc/learn/programming/functions/
+https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/
+
+[6] PlatformIO, Espressif 32 — PlatformIO Documentation; ESP32 Dev Module.
+Достъпно на:
+https://docs.platformio.org/en/latest/platforms/espressif32.html
+https://docs.platformio.org/en/latest/boards/espressif32/esp32dev.html
+
+[7] OASIS, MQTT Version 5.0.
+Достъпно на: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+
+[8] Z. Shelby, K. Hartke, and C. Bormann, RFC 7252: The Constrained Application Protocol (CoAP), IETF, 2014.
+Достъпно на: https://datatracker.ietf.org/doc/html/rfc7252
+
+[9] M. Fagan, K. Megas, K. Scarfone, and M. Smith, NISTIR 8259A: IoT Device Cybersecurity Capability Core Baseline, National Institute of Standards and Technology, 2020.
+Достъпно на: https://csrc.nist.gov/pubs/ir/8259/a/final
+
+[10] Espressif Systems, ESP-IDF Programming Guide: Secure Boot v2 for ESP32.
+Достъпно на: https://docs.espressif.com/projects/esp-idf/en/stable/esp32/security/secure-boot-v2.html
+
+[11] Espressif Systems, ESP-IDF Programming Guide: Flash Encryption for ESP32.
+Достъпно на: https://docs.espressif.com/projects/esp-idf/en/stable/esp32/security/flash-encryption.html
+
+[12] Adafruit, DHT11, DHT22 and AM2302 Sensors; Using a DHTxx Sensor with Arduino.
+Достъпно на:
+https://learn.adafruit.com/dht/overview
+https://learn.adafruit.com/dht/using-a-dhtxx-sensor-with-arduino
+
+[13] Python Software Foundation, Python Documentation: More Control Flow Tools.
+Достъпно на: https://docs.python.org/3/tutorial/controlflow.html
+
+[14] W3C, Web of Things (WoT) Overview.
+Достъпно на: https://www.w3.org/WoT/
