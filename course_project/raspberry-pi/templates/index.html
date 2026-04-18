@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="5">
+  <title>Smart Greenhouse Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Raspberry Pi edge node</p>
+        <h1>Smart Greenhouse Dashboard</h1>
+        <p class="lead">
+          Local monitoring for the hybrid Arduino + Raspberry Pi coursework project.
+        </p>
+      </div>
+      <div class="status-card status-{{ runtime.status.state }}">
+        <span class="status-label">Serial status</span>
+        <strong>{{ runtime.status.state|capitalize }}</strong>
+        <span>{{ runtime.status.message }}</span>
+        <span class="meta">
+          Updated {{ runtime.status.updated_at or "n/a" }}
+        </span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card accent">
+        <span class="card-label">Temperature</span>
+        <strong class="card-value">
+          {{ "%.1f"|format(latest.temperature_c) if latest else "n/a" }} °C
+        </strong>
+        <span class="card-meta">Air temperature</span>
+      </article>
+
+      <article class="card">
+        <span class="card-label">Humidity</span>
+        <strong class="card-value">
+          {{ "%.1f"|format(latest.humidity_pct) if latest else "n/a" }} %
+        </strong>
+        <span class="card-meta">Relative humidity</span>
+      </article>
+
+      <article class="card">
+        <span class="card-label">Soil moisture</span>
+        <strong class="card-value">
+          {{ latest.soil_pct if latest else "n/a" }} %
+        </strong>
+        <span class="card-meta">Converted from raw sensor value</span>
+      </article>
+
+      <article class="card">
+        <span class="card-label">Light level</span>
+        <strong class="card-value">
+          {{ latest.light_pct if latest else "n/a" }} %
+        </strong>
+        <span class="card-meta">Converted from raw sensor value</span>
+      </article>
+
+      <article class="card">
+        <span class="card-label">Relay</span>
+        <strong class="card-value">
+          {{ "On" if latest and latest.relay_on else "Off" }}
+        </strong>
+        <span class="card-meta">Pump or fan state</span>
+      </article>
+
+      <article class="card">
+        <span class="card-label">LED</span>
+        <strong class="card-value">
+          {{ "On" if latest and latest.led_on else "Off" }}
+        </strong>
+        <span class="card-meta">Status indicator</span>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Latest sample</p>
+          <h2>Current values</h2>
+        </div>
+        <span class="pill">Stored rows: {{ total_rows }}</span>
+      </div>
+
+      {% if latest %}
+      <dl class="details">
+        <div><dt>Device</dt><dd>{{ latest.device }}</dd></div>
+        <div><dt>Pi receive time</dt><dd>{{ latest.received_at }}</dd></div>
+        <div><dt>Arduino uptime</dt><dd>{{ latest.uptime_ms }} ms</dd></div>
+        <div><dt>Dry soil flag</dt><dd>{{ "Yes" if latest.dry_soil else "No" }}</dd></div>
+        <div><dt>High temp flag</dt><dd>{{ "Yes" if latest.high_temp else "No" }}</dd></div>
+        <div><dt>Low light flag</dt><dd>{{ "Yes" if latest.low_light else "No" }}</dd></div>
+      </dl>
+      {% else %}
+      <p class="empty">No valid Arduino reading has been stored yet.</p>
+      {% endif %}
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">History</p>
+          <h2>Recent readings</h2>
+        </div>
+        <span class="pill">{{ history|length }} samples</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Received at</th>
+              <th>Temp °C</th>
+              <th>Humidity %</th>
+              <th>Soil %</th>
+              <th>Light %</th>
+              <th>Relay</th>
+              <th>LED</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in history %}
+            <tr>
+              <td>{{ row.received_at }}</td>
+              <td>{{ "%.1f"|format(row.temperature_c) }}</td>
+              <td>{{ "%.1f"|format(row.humidity_pct) }}</td>
+              <td>{{ row.soil_pct }}</td>
+              <td>{{ row.light_pct }}</td>
+              <td>{{ "On" if row.relay_on else "Off" }}</td>
+              <td>{{ "On" if row.led_on else "Off" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

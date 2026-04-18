@@ -2,3 +2,6 @@
 .codex
 .pio/
 .vscode/
+__pycache__/
+*.pyc
+course_project/raspberry-pi/data/
